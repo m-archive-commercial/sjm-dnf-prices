@@ -39,6 +39,7 @@ ROBOTSTXT_OBEY = True
 DEFAULT_REQUEST_HEADERS = {
   'Accept'         : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'Accept-Language': 'en',
+  'JESSIONID'      : '560BB8E9F745BD98298D621C9C075F2A'
 }
 
 # Enable or disable spider middlewares

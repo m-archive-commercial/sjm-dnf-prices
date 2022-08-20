@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'sjm_dnf_prices.spiders'
 # USER_AGENT = 'sjm_dnf_prices (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -62,9 +62,12 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'sjm_dnf_prices.pipelines.SjmDnfPricesPipeline': 300,
-# }
+MONGO_URI = "localhost"
+MONGO_DATABASE = "sjm_dnf_prices"
+
+ITEM_PIPELINES = {
+   'sjm_dnf_prices.pipelines.MongoPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

@@ -15,9 +15,9 @@ def queryTreeDataWithLayers():
         for L1_id, L1_data in data['#']['children'].items():
             for L2_id, L2_data in L1_data['children'].items():
                 item = {
-                    "L1-ID"  : L1_id,
-                    "L1-name": L1_data['text'],
-                    "L2-ID"  : L2_id,
-                    "L2-name": L2_data["text"]
+                    "L1_id"  : L1_id,
+                    "L1_name": L1_data['text'],
+                    "L2_id"  : L2_id,
+                    "L2_name": L2_data["text"]
                 }
                 yield item

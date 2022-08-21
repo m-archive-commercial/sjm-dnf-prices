@@ -7,6 +7,7 @@ from scrapy import Request
 from scrapy.http import TextResponse
 from scrapy.shell import inspect_response
 
+from scripts.misc.treeDataLayered2db import queryTreeDataWithLayers
 from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
 from sjm_dnf_prices.settings import DATA_SOURCE_DIR
 
@@ -23,6 +24,7 @@ def parseJsonResponse(response):
     for row in response.json()['rows']:
         row[FIELD_COLL_NAME] = COLL_PRODUCT_NAME
         row["_id"] = row['id']
+        row["category"] = response.meta["category"]
         yield row
 
 
@@ -32,36 +34,33 @@ class ProductItem(TypedDict):
     text: str
 
 
-def queryProductIds() -> List[str]:
-    """
-    sample: 511e9dba8c1246e1a3354c225b4b7418 (幻化武器)
-    see: /data/source/treeData.json
-    :return:
-    """
-    with open(DATA_SOURCE_DIR / 'treeData.json', 'r') as f:
-        productItems: List[ProductItem] = json.load(f)
-        return [i['id'] for i in productItems]
-
-
 class GoodsSpider(scrapy.Spider):
     name = SPIDER_PRODUCT_NAME
     allowed_domains = ['dnf.yxwujia.com']
 
-    pageSize = 100
-    pageNo = 1
-
-    start_urls = []
-    for productId in queryProductIds()[:]:
-        start_urls.append(
-            'http://dnf.yxwujia.com/a/api/product/getByName'
-            '?name='
-            '&quality='
-            f'&ctype.id={productId}'
-            f'&pageNo={pageNo}'
-            '&orderBy='
-            '&_=1660984982504'
-            f'&pageSize={pageSize}'
-        )
+    def start_requests(self):
+        pageSize = 100
+        pageNo = 1
+        reqs = []
+        for categoryItem in queryTreeDataWithLayers():
+            url = (
+                'http://dnf.yxwujia.com/a/api/product/getByName'
+                '?name='
+                '&quality='
+                f'&ctype.id={categoryItem["L2_id"]}'
+                f'&pageNo={pageNo}'
+                '&orderBy='
+                '&_=1660984982504'
+                f'&pageSize={pageSize}'
+            )
+            reqs.append(Request(
+                url=url,
+                meta={
+                    "category": categoryItem
+                },
+                dont_filter=True
+            ))
+        return reqs
 
     def parse(self, response: TextResponse, **kwargs):
         """
@@ -80,4 +79,4 @@ class GoodsSpider(scrapy.Spider):
         expectedTotalPages = (data['total'] - 1) // pageSize + 1
         for pageNo in range(1, expectedTotalPages + 1):
             newUrl = re.sub(r'(?<=pageNo=)\d+', lambda m: str(pageNo), response.url)
-            yield Request(url=newUrl, callback=parseJsonResponse)
+            yield Request(url=newUrl, callback=parseJsonResponse, meta=response.meta)

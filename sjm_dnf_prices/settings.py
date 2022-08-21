@@ -6,6 +6,13 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import pathlib
+from os.path import abspath
+
+SETTINGS_PATH = pathlib.Path(abspath(__file__))
+PROJECT_DIR = SETTINGS_PATH.parent
+DATA_DIR = PROJECT_DIR / 'data'
+DATA_SOURCE_DIR = DATA_DIR / "source"
 
 BOT_NAME = 'sjm_dnf_prices'
 
@@ -13,33 +20,35 @@ SPIDER_MODULES = ['sjm_dnf_prices.spiders']
 NEWSPIDER_MODULE = 'sjm_dnf_prices.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'sjm_dnf_prices (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-# CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 5 + 1
 # The download delay setting will honor only one of:
-# CONCURRENT_REQUESTS_PER_DOMAIN = 16
-# CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 1
+CONCURRENT_REQUESTS_PER_IP = 1
 
+# 在headers中设置cookie时，要把这里的cookie给设置False， see: https://zhuanlan.zhihu.com/p/337212121
 # Disable cookies (enabled by default)
-# COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-  'Accept'         : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'Accept-Language': 'en',
-  'JESSIONID'      : '560BB8E9F745BD98298D621C9C075F2A'
+    'Accept'         : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'en',
+    # dnf.session.id 是 price 爬取的必要参数
+    'Cookie'         : 'dnf.session.id=a545803681504dc686c6e35aaf23f362;'
 }
 
 # Enable or disable spider middlewares
@@ -66,7 +75,7 @@ MONGO_URI = "localhost"
 MONGO_DATABASE = "sjm_dnf_prices"
 
 ITEM_PIPELINES = {
-   'sjm_dnf_prices.pipelines.MongoPipeline': 300,
+    'sjm_dnf_prices.pipelines.MongoPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

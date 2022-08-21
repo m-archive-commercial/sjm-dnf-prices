@@ -1,10 +1,17 @@
+import json
 import re
-from urllib.parse import urlencode, parse_qs
+from typing import List, TypedDict
 
 import scrapy
 from scrapy import Request
 from scrapy.http import TextResponse
 from scrapy.shell import inspect_response
+
+from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
+from sjm_dnf_prices.settings import DATA_SOURCE_DIR
+
+SPIDER_PRODUCT_NAME = "product"
+COLL_PRODUCT_NAME = SPIDER_PRODUCT_NAME
 
 
 def parseJsonResponse(response):
@@ -14,32 +21,47 @@ def parseJsonResponse(response):
     :return:
     """
     for row in response.json()['rows']:
-        row["coll"] = "goods"
+        row[FIELD_COLL_NAME] = COLL_PRODUCT_NAME
+        row["_id"] = row['id']
         yield row
 
 
-class GoodsSpider(scrapy.Spider):
-    name = 'goods'
-    allowed_domains = ['dnf.yxwujia.com']
+class ProductItem(TypedDict):
+    parent: str
+    id: str
+    text: str
 
-    ctypeIds = [
-        'b98c6889625840a48e2204021051e0fb'  # 特殊装备 - 辅助装备通用 - 全部品质
-        'c4d4872bd34c4278ab19358e2d70123f'  # 特殊装备 - 魔法石通用 - 全部品质
-    ]
+
+def queryProductIds() -> List[str]:
+    """
+    sample: 511e9dba8c1246e1a3354c225b4b7418 (幻化武器)
+    see: /data/source/treeData.json
+    :return:
+    """
+    with open(DATA_SOURCE_DIR / 'treeData.json', 'r') as f:
+        productItems: List[ProductItem] = json.load(f)
+        return [i['id'] for i in productItems]
+
+
+class GoodsSpider(scrapy.Spider):
+    name = SPIDER_PRODUCT_NAME
+    allowed_domains = ['dnf.yxwujia.com']
 
     pageSize = 100
     pageNo = 1
-    ctypeId = ctypeIds[0]
-    start_urls = [
-        'http://dnf.yxwujia.com/a/api/product/getByName'
-        '?name='
-        '&quality='
-        f'&ctype.id={ctypeId}'
-        f'&pageNo={pageNo}'
-        '&orderBy='
-        '&_=1660984982504'
-        f'&pageSize={pageSize}'
-    ]
+
+    start_urls = []
+    for productId in queryProductIds()[:]:
+        start_urls.append(
+            'http://dnf.yxwujia.com/a/api/product/getByName'
+            '?name='
+            '&quality='
+            f'&ctype.id={productId}'
+            f'&pageNo={pageNo}'
+            '&orderBy='
+            '&_=1660984982504'
+            f'&pageSize={pageSize}'
+        )
 
     def parse(self, response: TextResponse, **kwargs):
         """

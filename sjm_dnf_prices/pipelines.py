@@ -1,6 +1,8 @@
 import pymongo
 from itemadapter import ItemAdapter
 
+FIELD_COLL_NAME = "coll_name"
+
 
 class MongoPipeline:
 
@@ -23,5 +25,8 @@ class MongoPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        self.db[item["coll"]].insert_one(ItemAdapter(item).asdict())
+        # product
+        if "success" not in item \
+            or item["success"] is True:  # price
+            self.db[item[FIELD_COLL_NAME]].insert_one(ItemAdapter(item).asdict())
         return item

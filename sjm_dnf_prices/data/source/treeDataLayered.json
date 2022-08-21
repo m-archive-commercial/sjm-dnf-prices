@@ -1,0 +1,478 @@
+{
+  "#": {
+    "children": {
+      "64b8fd16060445419e467f1471e4736d": {
+        "text": "特殊装备",
+        "children": {
+          "b98c6889625840a48e2204021051e0fb": {
+            "text": "辅助装备通用",
+            "children": {}
+          },
+          "c4d4872bd34c4278ab19358e2d70123f": {
+            "text": "魔法石通用",
+            "children": {}
+          },
+          "fc5842305f53460589c67180a95957a9": {
+            "text": "耳环",
+            "children": {}
+          }
+        }
+      },
+      "18f7c15b1b3c40b9add106948639dec3": {
+        "children": {
+          "598b26b621e246d38e631eb42819b207": {
+            "text": "项链",
+            "children": {}
+          },
+          "c9a0caed330c4fd19ad8f5306d1e2836": {
+            "text": "手镯",
+            "children": {}
+          },
+          "d1b9477e20714274850ab84656ec07a8": {
+            "text": "称号",
+            "children": {}
+          },
+          "f95e18c5212d4138b1b278062b29a0f5": {
+            "text": "戒指",
+            "children": {}
+          }
+        },
+        "text": "首饰"
+      },
+      "3fce2f34967249d8bde5b86cbdcc1078": {
+        "children": {
+          "511e9dba8c1246e1a3354c225b4b7418": {
+            "text": "幻化武器",
+            "children": {}
+          },
+          "5dd5460e3de74075ae1bf28246a6fd55": {
+            "text": "棍棒",
+            "children": {}
+          },
+          "0fef3c8b388b490993f98611667494cd": {
+            "text": "短剑",
+            "children": {}
+          },
+          "19ac7bcd1f3e43a589f9c7ffad0420ce": {
+            "text": "长刀",
+            "children": {}
+          },
+          "1a21a962dcd844efa6105b4393393288": {
+            "text": "钝器",
+            "children": {}
+          },
+          "1b287e667e214afbb9813bcaa02a82c6": {
+            "text": "臂铠",
+            "children": {}
+          },
+          "1ee2d7aaba104b918fcb6a17594eae35": {
+            "text": "手弩",
+            "children": {}
+          },
+          "20d0dd2db2fd41c39e557b8b12b4b650": {
+            "text": "战戟",
+            "children": {}
+          },
+          "20f53889be4a4994bb567e407e9b7fa2": {
+            "text": "源力剑",
+            "children": {}
+          },
+          "29090f0e80674deb87c04e36bbe0638b": {
+            "text": "重剑",
+            "children": {}
+          },
+          "2b47c60f1d174a55973f6183df5ce148": {
+            "text": "巨剑",
+            "children": {}
+          },
+          "2f1c56afaeb645f298b209645bab39f6": {
+            "text": "十字架",
+            "children": {}
+          },
+          "44de71aed3e840ef86018d93e37eae19": {
+            "text": "爪",
+            "children": {}
+          },
+          "505230651aa44824935b60cd28e8165c": {
+            "text": "手套",
+            "children": {}
+          },
+          "0a7b3806133745d09a1d002361cf5d45": {
+            "text": "太刀",
+            "children": {}
+          },
+          "700922ea17904808b107e741bb14a485": {
+            "text": "权杖",
+            "children": {}
+          },
+          "015fa578ae254c03a72c6fa4bf944162": {
+            "text": "光枪",
+            "children": {}
+          },
+          "7445de249c784a55b0f37c8379a4df35": {
+            "text": "法杖",
+            "children": {}
+          },
+          "75393601645d4a0fa5bc628b40e604e7": {
+            "text": "东方棍",
+            "children": {}
+          },
+          "762889d3ee90485caa7d3f6a35d5bcf5": {
+            "text": "光剑",
+            "children": {}
+          },
+          "83b7f7beb5374af4b6fb3b45dce1f3c3": {
+            "text": "扫把",
+            "children": {}
+          },
+          "8674f4b5ed4445998002dc29501d1b87": {
+            "text": "暗矛",
+            "children": {}
+          },
+          "972e0333271e48239de8b80e0640e7f5": {
+            "text": "长枪",
+            "children": {}
+          },
+          "9b2119002cb549f583de8ab428fae1c2": {
+            "text": "双剑",
+            "children": {}
+          },
+          "9e0a47a257e24d47b0420d9d34539088": {
+            "text": "魔杖",
+            "children": {}
+          },
+          "a1ca68a0fc794b3aa0f0bb80dbcbd44d": {
+            "text": "匕首",
+            "children": {}
+          },
+          "ab23106a252c4e35a2ae4947687010c2": {
+            "text": "图腾",
+            "children": {}
+          },
+          "ac896f78cb1c4d72aa97ef015c618ec7": {
+            "text": "左轮枪",
+            "children": {}
+          },
+          "b6418928d24b453ea70e7a1061aaad99": {
+            "text": "手炮",
+            "children": {}
+          },
+          "c5de5c0cedd5492493118cc0b569ef5b": {
+            "text": "自动手枪",
+            "children": {}
+          },
+          "cab6a6659db04593b200feb0278128ea": {
+            "text": "矛",
+            "children": {}
+          },
+          "d02eef9f9207467aa0e484499e7e5ac6": {
+            "text": "苦无",
+            "children": {}
+          },
+          "d230ab29e0564a0e95f4a77628dea7e6": {
+            "text": "步枪",
+            "children": {}
+          },
+          "d3b5ead9090e47a28ca2f7ebcec5f161": {
+            "text": "小太刀",
+            "children": {}
+          },
+          "d754ef1296c74785ad9cd22e3949deed": {
+            "text": "镰刀",
+            "children": {}
+          },
+          "e6e958e0cd354819b4068aa1f9aa51ca": {
+            "text": "拳套",
+            "children": {}
+          },
+          "ed4cdf39d2ae496a819ac1c903e8bf56": {
+            "text": "念珠",
+            "children": {}
+          },
+          "f076e92ba97246128a4f57ca741c3a1d": {
+            "text": "战斧",
+            "children": {}
+          }
+        },
+        "text": "武器"
+      },
+      "502a0843739247fbb201cfb1b65fb837": {
+        "children": {
+          "52d49fd5787541899215176a85e641f7": {
+            "text": "宠物",
+            "children": {}
+          },
+          "2dc88f044f0f49fcb6549727ff2c1eff": {
+            "text": "95级换装武器",
+            "children": {}
+          },
+          "4e17d72d732641bf93f9e204084c7034": {
+            "text": "称号",
+            "children": {}
+          },
+          "0894567dc3b845d1a71f87c8ee4427b2": {
+            "text": "副职业",
+            "children": {}
+          },
+          "73786e772bb84387a6e2f14c95aa2b2e": {
+            "text": "消耗品",
+            "children": {}
+          },
+          "9d7bd4761e0245808fa97e148fedd743": {
+            "text": "期限道具",
+            "children": {}
+          },
+          "e48d83c9c83943cf923434d2853522e5": {
+            "text": "徽章",
+            "children": {}
+          },
+          "25261cec58e645eb903a458d9452a09f": {
+            "text": "装备",
+            "children": {}
+          }
+        },
+        "text": "韩服独有"
+      },
+      "73123b8f7e974bc0a41bb47bed566218": {
+        "children": {
+          "5c1b2e20662e4953aa86f9ac76f90586": {
+            "text": "重甲头肩",
+            "children": {}
+          },
+          "0efdd790608d456e84b802fc80fb8de9": {
+            "text": "轻甲腰带",
+            "children": {}
+          },
+          "1cd4f6ea08174504ab24a62c21939e7c": {
+            "text": "重甲鞋",
+            "children": {}
+          },
+          "1ff563d1d84a4da585781c3f28f4a64a": {
+            "text": "板甲鞋",
+            "children": {}
+          },
+          "34ebcfaa1ce64d038d268d4e9b688e05": {
+            "text": "皮甲腰带",
+            "children": {}
+          },
+          "3f29b3f7213b4c37b53a7d60ed9dfe89": {
+            "text": "板甲腰带",
+            "children": {}
+          },
+          "0a9776dc0e71461e8603d6b8a70a4060": {
+            "text": "重甲腰带",
+            "children": {}
+          },
+          "6ebba1960a0141798b42f5a0b7e587ae": {
+            "text": "板甲头肩",
+            "children": {}
+          },
+          "01763d13e9274b1aa8938f4117185b73": {
+            "text": "皮甲上衣",
+            "children": {}
+          },
+          "7933bd34cad94e47b534d92397309510": {
+            "text": "皮甲鞋",
+            "children": {}
+          },
+          "8710659426e44153b107d899d8ceed7a": {
+            "text": "轻甲下装",
+            "children": {}
+          },
+          "9054575e13a04d43a3c627527fe8e238": {
+            "text": "板甲下装",
+            "children": {}
+          },
+          "97bdc63765b24934ba2212b26f76cb73": {
+            "text": "布甲下装",
+            "children": {}
+          },
+          "98cb6a487f514144b7670c0efff4c713": {
+            "text": "轻甲鞋",
+            "children": {}
+          },
+          "9fb72a9dbb4e439bbea3000336117fda": {
+            "text": "皮甲下装",
+            "children": {}
+          },
+          "b9b72c127aa2428289d4822b8ead6b92": {
+            "text": "重甲下装",
+            "children": {}
+          },
+          "be76566a4f244dbea2d72baa3e026eb5": {
+            "text": "布甲鞋",
+            "children": {}
+          },
+          "be9cb2607b90483cb5069d1b22f5a842": {
+            "text": "重甲上衣",
+            "children": {}
+          },
+          "c080e6061c4b41e2952c1a2170eb19e5": {
+            "text": "布甲头肩",
+            "children": {}
+          },
+          "c486fa8dbb6f478dbbb2047c1e8dbdb3": {
+            "text": "布甲上衣",
+            "children": {}
+          },
+          "ce6c6110cc1748d18f638775abc02284": {
+            "text": "布甲腰带",
+            "children": {}
+          },
+          "f539b1e0070b46cea8fcc9c775313092": {
+            "text": "板甲上衣",
+            "children": {}
+          },
+          "f9114767287746adafd448c53f0d7d0b": {
+            "text": "轻甲上衣",
+            "children": {}
+          },
+          "f99655d77c9d4be8b306331e4333fd8e": {
+            "text": "轻甲头肩",
+            "children": {}
+          },
+          "fb882b4d1bfa486db3a7133222a50121": {
+            "text": "皮甲头肩",
+            "children": {}
+          }
+        },
+        "text": "防具"
+      },
+      "a5cb859c8768484f89dac0065121b754": {
+        "text": "汇率",
+        "children": {
+          "d556090f0e72413db4d3846a97a0d843": {
+            "text": "人民币",
+            "children": {}
+          }
+        }
+      },
+      "a5cbf211bf304302b54413544b841477": {
+        "children": {
+          "258338957db044fdb0825aca070112a1": {
+            "text": "首饰",
+            "children": {}
+          },
+          "3457bbfb6970403d9e5d9e8e7c97a018": {
+            "text": "武器",
+            "children": {}
+          },
+          "4a7a042ca006466383047dbb559f70ec": {
+            "text": "防具",
+            "children": {}
+          },
+          "4f44a10ee8984c09a89e22628f51ae1b": {
+            "text": "附魔卡片及宝珠",
+            "children": {}
+          },
+          "af64e3d66697424c809e745ec16d6540": {
+            "text": "特殊装备",
+            "children": {}
+          }
+        },
+        "text": "最低价"
+      },
+      "ad1aca6e303c48e39833cfced5b7fe42": {
+        "children": {
+          "6ae4d644b5e24862911d41317770baf4": {
+            "text": "期限道具",
+            "children": {}
+          }
+        },
+        "text": "期限道具"
+      },
+      "dbb3648b4aa948f08e489d2bcf703615": {
+        "children": {
+          "2928aa4142784afc812a93a6d263aaf3": {
+            "text": "附魔卡片及宝珠",
+            "children": {}
+          },
+          "2a9de52b07604d3eaebf72cf91d58120": {
+            "text": "防具",
+            "children": {}
+          },
+          "375a6719b9d54f3ebf716d5832787356": {
+            "text": "材料及消耗品",
+            "children": {}
+          },
+          "79aef30324904874b345114e76745222": {
+            "text": "武器",
+            "children": {}
+          },
+          "8020967ba0414f6fba6d94c521c11e01": {
+            "text": "首饰",
+            "children": {}
+          },
+          "b93c14ade7d14e568732bf2bb14aeca9": {
+            "text": "特殊装备",
+            "children": {}
+          }
+        },
+        "text": "平均价"
+      },
+      "fea483db9f3440768687e165f52142b5": {
+        "children": {
+          "96a770aa035b4c0a91bc5ab0497ecfd1": {
+            "text": "材料",
+            "children": {}
+          },
+          "ba8b942a59fc4951963b720832cf1377": {
+            "text": "其他",
+            "children": {}
+          },
+          "bfd011543a764a8aaf13f8f406c07311": {
+            "text": "抽取",
+            "children": {}
+          },
+          "c40223e8b1af44818615a1abc2e598fc": {
+            "text": "消耗品",
+            "children": {}
+          },
+          "0e54adb357a64d388c744da959f182de": {
+            "text": "设计图",
+            "children": {}
+          }
+        },
+        "text": "消耗品"
+      },
+      "fecd78becbff4bc6a47836f2c94207ab": {
+        "children": {
+          "7476029579a744cdb27f5edf21fece37": {
+            "text": "副职材料",
+            "children": {}
+          },
+          "80e39af7568040d6a2477f3679e97829": {
+            "text": "控偶师",
+            "children": {}
+          },
+          "aafa2f49413f4f3591f13077d712cb88": {
+            "text": "附魔师",
+            "children": {}
+          },
+          "e942b1f678164931b423801174b93938": {
+            "text": "炼金术师",
+            "children": {}
+          }
+        },
+        "text": "副职业"
+      },
+      "738e2fdf62c849b693ff16467eac69d4": {
+        "children": {
+          "c0b144b3c025424b84bcaec06f49b0b3": {
+            "text": "司南",
+            "children": {}
+          },
+          "6c7ccf80219e4fdb84c6eac4abb7fc0b": {
+            "text": "辟邪玉",
+            "children": {}
+          },
+          "01793f1fffc54987827dce166db22d1a": {
+            "text": "玉荣",
+            "children": {}
+          }
+        },
+        "text": "未央幻境装备"
+      }
+    }
+  }
+}

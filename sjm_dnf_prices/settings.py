@@ -51,6 +51,10 @@ DEFAULT_REQUEST_HEADERS = {
     'Cookie'         : 'dnf.session.id=a545803681504dc686c6e35aaf23f362;'
 }
 
+
+# ref: https://doc.scrapy.org/en/latest/topics/spider-middleware.html?highlight=allowed_http#httperror-allowed-codes
+HTTPERROR_ALLOWED_CODES = [500]
+
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
@@ -69,7 +73,7 @@ DEFAULT_REQUEST_HEADERS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 # }
 
-# Configure item pipelines
+# Configure itemInPrice pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 MONGO_URI = "localhost"
 MONGO_DATABASE = "sjm_dnf_prices"

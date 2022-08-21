@@ -7,6 +7,6 @@ import scrapy
 
 
 class SjmDnfPricesItem(scrapy.Item):
-    # define the fields for your item here like:
+    # define the fields for your itemInPrice here like:
     # name = scrapy.Field()
     pass

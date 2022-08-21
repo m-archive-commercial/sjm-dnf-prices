@@ -25,8 +25,5 @@ class MongoPipeline:
         self.client.close()
 
     def process_item(self, item, spider):
-        # product
-        if "success" not in item \
-            or item["success"] is True:  # price
-            self.db[item[FIELD_COLL_NAME]].insert_one(ItemAdapter(item).asdict())
+        self.db[item[FIELD_COLL_NAME]].insert_one(ItemAdapter(item).asdict())
         return item

@@ -5,7 +5,7 @@
 
 from scrapy import signals
 
-# useful for handling different item types with a single interface
+# useful for handling different itemInPrice types with a single interface
 from itemadapter import is_item, ItemAdapter
 
 
@@ -32,7 +32,7 @@ class SjmDnfPricesSpiderMiddleware:
         # Called with the results returned from the Spider, after
         # it has processed the response.
 
-        # Must return an iterable of Request, or item objects.
+        # Must return an iterable of Request, or itemInPrice objects.
         for i in result:
             yield i
 
@@ -40,7 +40,7 @@ class SjmDnfPricesSpiderMiddleware:
         # Called when a spider or process_spider_input() method
         # (from other spider middleware) raises an exception.
 
-        # Should return either None or an iterable of Request or item objects.
+        # Should return either None or an iterable of Request or itemInPrice objects.
         pass
 
     def process_start_requests(self, start_requests, spider):

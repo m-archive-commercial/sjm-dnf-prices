@@ -6,6 +6,7 @@ import scrapy
 from scrapy import Request
 from scrapy.http import TextResponse
 
+from sjm_dnf_prices.items import PriceItem
 from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
 from sjm_dnf_prices.settings import MONGO_DATABASE
 from sjm_dnf_prices.spiders.product import COLL_PRODUCT_NAME
@@ -67,13 +68,22 @@ class PriceSpider(scrapy.Spider):
         id = response.meta["id"]
         # scenario: normal
         if response.status == 200:
-            data = response.json()
-            data["name"] = response.meta['name']
-            data["category"] = response.meta["category"]
-            data["_id"] = id
-            data[FIELD_COLL_NAME] = COLL_PRICE_NAME
-            if data['success'] == True:
-                yield data
+            data = response.json() # type: dict
+
+            if data['success']:
+                assert set(data.keys()) == {'success', 'errorCode', 'msg', 'data'}, data
+                priceItem = PriceItem(
+                    success=data['success'],
+                    errorCode=data['errorCode'],
+                    msg=data['msg'],
+                    data=data['data'],
+
+                    _id=id,
+
+                    category=response.meta['category'],
+                    coll_name=COLL_PRICE_NAME,
+                )
+                yield priceItem
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
                     {"$set": {COLL_PRODUCT_FIELD_WITH_PRICE: STATUS_WITH_PRICE.OK}})
             else:
@@ -82,6 +92,7 @@ class PriceSpider(scrapy.Spider):
                     2022-08-22 06:05:13 [scrapy.core.scraper] DEBUG: Scraped from <200 http://dnf.yxwujia.com/a/query/data?server=qqqfpj&wpmc=%E9%AB%98%E5%BC%BA%E5%8C%96%E9%98%BF%E5%B0%94%E9%AB%98%E6%96%AF%20%E5%8D%A1%E7%89%87&type=&startDate=2016-01-01&endDate=2022-08-20&unit=yxb&low=djx&avg=pjjx&high=gjx&period=day>
                     {'success': False, 'errorCode': '-1', 'msg': '查询过于频繁,5次操作后，账号将被锁定！！', 'name': '高强化阿尔高斯 卡片', 'category': {'L1_id': 'fecd78becbff4bc6a47836f2c94207ab', 'L1_name': '副职业', 'L2_id': '7476029579a744cdb27f5edf21fece37', 'L2_name': '副职材料'}, '_id': '2744', 'coll_name': 'price'}
                 """
+                assert set(data.keys()) == {'success', 'errorCode', 'msg'}, data
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
                     {"$set": {COLL_PRODUCT_FIELD_WITH_PRICE: STATUS_WITH_PRICE.FAILED_FOR_TOO_FREQUENT}})
 

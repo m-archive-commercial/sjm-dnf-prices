@@ -1,6 +1,8 @@
 import pymongo
 from itemadapter import ItemAdapter
 
+from sjm_dnf_prices.items import PriceItem
+
 FIELD_COLL_NAME = "coll_name"
 
 
@@ -24,6 +26,12 @@ class MongoPipeline:
     def close_spider(self, spider):
         self.client.close()
 
-    def process_item(self, item, spider):
-        self.db[item[FIELD_COLL_NAME]].insert_one(ItemAdapter(item).asdict())
+    def process_item(self, item: PriceItem, spider):
+        """
+        todo: compat with product
+        :param item:
+        :param spider:
+        :return:
+        """
+        self.db[item.coll_name].insert_one(ItemAdapter(item).asdict())
         return item

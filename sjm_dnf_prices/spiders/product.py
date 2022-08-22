@@ -1,15 +1,12 @@
-import json
 import re
-from typing import List, TypedDict
+from typing import TypedDict
 
 import scrapy
 from scrapy import Request
 from scrapy.http import TextResponse
-from scrapy.shell import inspect_response
 
 from scripts.misc.treeDataLayered2db import queryTreeDataWithLayers
 from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
-from sjm_dnf_prices.settings import DATA_SOURCE_DIR
 
 SPIDER_PRODUCT_NAME = "product"
 COLL_PRODUCT_NAME = SPIDER_PRODUCT_NAME

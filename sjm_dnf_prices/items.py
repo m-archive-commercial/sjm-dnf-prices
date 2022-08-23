@@ -14,7 +14,7 @@ from scripts.misc.printCategory import printCategory
 @dataclass
 class PriceItem:
     # define the fields for your itemInPrice here like:
-    # name = scrapy.Field()
+    name: str
     success: bool  # default: True
     errorCode: str  # {type:int, sample: -1}
     msg: str  # default： 操作成功
@@ -23,12 +23,5 @@ class PriceItem:
     _id: str  # int
     coll_name: str
 
-    def getName(self):
-        try:
-            return self.data["title"]['text']
-        except:
-            pprint(self.__dict__)
-            return ''
-
     def __repr__(self):
-        return f"PriceItem(id={self._id}, name={self.getName()}, success={self.success}, msg={self.msg}, category={printCategory(self.category)})"
+        return f"PriceItem(id={self._id}, name={self.name}, success={self.success}, msg={self.msg}, category={printCategory(self.category)})"

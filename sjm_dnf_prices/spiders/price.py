@@ -80,6 +80,7 @@ class PriceSpider(scrapy.Spider):
 
                     _id=id,
 
+                    name=response.meta['name'],
                     category=response.meta['category'],
                     coll_name=COLL_PRICE_NAME,
                 )

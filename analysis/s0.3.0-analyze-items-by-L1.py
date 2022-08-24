@@ -8,24 +8,11 @@
 from collections import OrderedDict
 import os
 from os import path
-import pymongo
-from pymongo.mongo_client import MongoClient
 import pandas as pd
-from pprint import pprint
 from datetime import datetime
 
-# %%
-client = MongoClient()
-db = client['sjm_dnf_prices']
-coll_price = db['price']
-coll_product = db['product']
-coll_price.count_documents({})
+from base import coll_price, db, coll_product
 
-# %% [markdown]
-# ### validate
-#
-
-# %%
 elems = list(coll_price.aggregate([
     {
         "$group": {
@@ -66,58 +53,6 @@ elems = list(coll_price.aggregate([
         }
     }
 ]))
-# %%
-vexpr = {
-    "collMod"         : "price",
-    "validator"       : {
-        "$jsonSchema": {
-            "bsonType"  : "object",
-            "required"  : ["category", "data", "name"],
-            "properties": {
-                "data": {
-                    "properties": {
-                        "xAxis" : {
-                            "bsonType": "array",
-                            "minItems": 1,
-                            "maxItems": 1
-                        },
-                        "series": {
-                            "bsonType"   : "array",
-                            "minItems"   : 3,
-                            "maxItems"   : 3,
-                            "uniqueItems": True,
-                            "items"      : {
-                                "properties": {
-                                    "name": {
-                                        "enum": [
-                                            "低价",
-                                            "平均价",
-                                            "高价"
-                                        ]
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "validationLevel" : "strict",
-    "validationAction": "error"
-}
-
-db.command(OrderedDict(vexpr))
-
-db.validate_collection('price')
-
-# TODO: why no errors, instead of warnings ?
-
-# check log if validated result has `warnings` or `errors`
-# client.admin.command( { "getLog": "global" } )
-
-
-print()
 
 
 def drop_duplicates_by_index(df, printAtEnd=True) -> pd.DataFrame:

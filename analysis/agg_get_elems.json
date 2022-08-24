@@ -1,0 +1,57 @@
+{
+  "$group": {
+    "_id": {
+      "L1_name": "$category.L1_name",
+      "L2_name": "$category.L2_name"
+    },
+    "items": {
+      "$push": {
+        "name": {
+          "$substrCP": [
+            "$data.title.text",
+            0,
+            {
+              "$subtract": [
+                {
+                  "$strLenCP": "$data.title.text"
+                },
+                5
+              ]
+            }
+          ]
+        },
+        "category": "$category",
+        "x": {
+          "$arrayElemAt": [
+            "$data.xAxis.data",
+            0
+          ]
+        },
+        "y": {
+          "$let": {
+            "vars": {
+              "item": {
+                "$arrayElemAt": [
+                  {
+                    "$filter": {
+                      "input": "$data.series",
+                      "as": "item",
+                      "cond": {
+                        "$eq": [
+                          "$$item.name",
+                          "平均价"
+                        ]
+                      }
+                    }
+                  },
+                  0
+                ]
+              }
+            },
+            "in": "$$item.data"
+          }
+        }
+      }
+    }
+  }
+}

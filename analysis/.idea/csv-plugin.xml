@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/sjm_dnf_price_v0.3.0_08-24T16-52/indexes/index.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

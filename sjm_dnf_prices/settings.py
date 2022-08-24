@@ -48,8 +48,10 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept'         : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en',
     # dnf.session.id 是 price 爬取的必要参数
-    'Cookie'         : 'dnf.session.id=2aa0958c55124fa19fe8182eb26f4d6d;'
+    'Cookie'         : 'dnf.session.id=37f00fd41fc94ccfbcb358cd0d4d4f84;'
 }
+
+RETRY_ENABLED = False
 
 
 # ref: https://doc.scrapy.org/en/latest/topics/spider-middleware.html?highlight=allowed_http#httperror-allowed-codes

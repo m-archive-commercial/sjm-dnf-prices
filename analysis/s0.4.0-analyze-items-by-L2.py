@@ -15,9 +15,10 @@ from utils import transProductInDB, getCurTime, item2df, joinDFs
 with open('agg_get_elems.json', 'r') as f:
     elems = list(coll_price.aggregate([json.load(f)]))
 
-VERSION = '0.4.0'  # added L2 category
-# VERSION = '0.3.0'  # finished crawl, added withPrice status
 # VERSION = '0.2.2' # added feat of column sort
+# VERSION = '0.3.0'  # finished crawl, added withPrice status
+# VERSION = '0.4.0'  # added L2 category
+VERSION = '0.4.1'  # fixed 500
 
 out_dir = f'output/sjm_dnf_price_v{VERSION}_{getCurTime()}'
 out_prices_dir = path.join(out_dir, "prices")
@@ -44,5 +45,8 @@ for elem in elems:
     df.to_csv(fp, encoding='utf_8_sig')
 
     print(f'dumped into file://{fp}')
+
+ZIP_COMMAND = f"zip {out_dir}.zip -r {out_dir}"
+os.system(ZIP_COMMAND)
 
 exit(0)

@@ -28,7 +28,11 @@ COLL_NAMES:
 
 ## Data Structure
 
-1. get data id list via **after login**: `http://dnf.yxwujia.com/a/product/procutType/treeData`
+1. get data id list via **after login**: 
+
+```shell
+http://dnf.yxwujia.com/a/product/procutType/treeData
+```
 
 item sample:
 

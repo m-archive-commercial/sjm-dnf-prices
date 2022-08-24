@@ -1,4 +1,3 @@
-from enum import Enum
 from urllib.parse import quote
 
 import pymongo
@@ -6,24 +5,13 @@ import scrapy
 from scrapy import Request
 from scrapy.http import TextResponse
 
+from sjm_dnf_prices.ds import STATUS_WITH_PRICE, SPIDER_PRICE_NAME, COLL_PRICE_NAME, FIELD_WITH_PRICE, \
+    COLL_PRODUCT_NAME, PASSED_STATUSES_WITH_PRICE
 from sjm_dnf_prices.items import PriceItem
-from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
 from sjm_dnf_prices.settings import MONGO_DATABASE
-from sjm_dnf_prices.spiders.product import COLL_PRODUCT_NAME
 
 uri = pymongo.MongoClient()
 db = uri[MONGO_DATABASE]
-
-SPIDER_PRICE_NAME = "price"
-COLL_PRICE_NAME = SPIDER_PRICE_NAME
-
-COLL_PRODUCT_FIELD_WITH_PRICE = "withPrice"
-
-
-class STATUS_WITH_PRICE(str, Enum):
-    OK = "OK"
-    FAILED_FOR_TOO_FREQUENT = "too frequent"
-    FAILED_FOR_INTERNAL_SERVER_ERROR = "500 internal server"
 
 
 class PriceSpider(scrapy.Spider):
@@ -32,14 +20,7 @@ class PriceSpider(scrapy.Spider):
 
     def start_requests(self):
         reqs = []
-        products = list(db[COLL_PRODUCT_NAME].find(
-            {
-                COLL_PRODUCT_FIELD_WITH_PRICE: {
-                    "$nin": [STATUS_WITH_PRICE.OK, STATUS_WITH_PRICE.FAILED_FOR_INTERNAL_SERVER_ERROR]},
-                # 在使用平均大区的筛选条件下，韩服数据会返回500
-                "category.L1_name"           : {"$ne": "韩服独有"}}
-        ))
-        assert 7903 not in [i['_id'] for i in products]
+        products = list(db[COLL_PRODUCT_NAME].find({FIELD_WITH_PRICE: {"$nin": PASSED_STATUSES_WITH_PRICE}}))
         for product in products:
             id = product['id']
             name = product['name']
@@ -62,13 +43,14 @@ class PriceSpider(scrapy.Spider):
                 url=url,
                 meta={"id": id, "name": name, "category": product["category"]},
                 dont_filter=True))
+        print(f'\n===\nTOTAL: {len(reqs)}\n===\n')
         return reqs
 
     def parse(self, response: TextResponse, **kwargs):
         id = response.meta["id"]
         # scenario: normal
         if response.status == 200:
-            data = response.json() # type: dict
+            data = response.json()  # type: dict
 
             if data['success']:
                 assert set(data.keys()) == {'success', 'errorCode', 'msg', 'data'}, data
@@ -86,7 +68,7 @@ class PriceSpider(scrapy.Spider):
                 )
                 yield priceItem
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                    {"$set": {COLL_PRODUCT_FIELD_WITH_PRICE: STATUS_WITH_PRICE.OK}})
+                    {"$set": {FIELD_WITH_PRICE: STATUS_WITH_PRICE.OK}})
             else:
                 """
                 response sample:
@@ -95,7 +77,7 @@ class PriceSpider(scrapy.Spider):
                 """
                 assert set(data.keys()) == {'success', 'errorCode', 'msg'}, data
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                    {"$set": {COLL_PRODUCT_FIELD_WITH_PRICE: STATUS_WITH_PRICE.FAILED_FOR_TOO_FREQUENT}})
+                    {"$set": {FIELD_WITH_PRICE: STATUS_WITH_PRICE.FAILED_FOR_TOO_FREQUENT}})
 
         if response.status == 500:
             """
@@ -108,4 +90,4 @@ class PriceSpider(scrapy.Spider):
                 2022-08-22 06:03:44 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <500 http://dnf.yxwujia.com/a/query/data?server=qqqfpj&wpmc=%E6%9D%B0%E6%A3%AE&middot;%E6%A0%BC%E9%87%8C%E5%85%8B%20%E5%8D%A1%E7%89%87&type=&startDate=2016-01-01&endDate=2022-08-20&unit=yxb&low=djx&avg=pjjx&high=gjx&period=day>: HTTP status code is not handled or not allowed
             """
             db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                {"$set": {COLL_PRODUCT_FIELD_WITH_PRICE: STATUS_WITH_PRICE.FAILED_FOR_INTERNAL_SERVER_ERROR}})
+                {"$set": {FIELD_WITH_PRICE: STATUS_WITH_PRICE.PASSED_FOR_INTERNAL_SERVER_ERROR}})

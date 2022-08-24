@@ -29,19 +29,19 @@ coll_price.count_documents({})
 elems = list(coll_price.aggregate([
     {
         "$group": {
-            "_id": "$category.L1_name",
+            "_id"  : "$category.L1_name",
             "items": {"$push": {
-                "name": {
+                "name"    : {
                     # xxx价格走势图
                     "$substrCP": ["$data.title.text", 0, {
                         "$subtract": [{"$strLenCP": "$data.title.text"}, 5]
                     }],
                 },
                 "category": "$category",
-                "x": {
+                "x"       : {
                     "$arrayElemAt": ["$data.xAxis.data", 0]
                 },
-                "y": {
+                "y"       : {
                     "$let": {
                         "vars": {
                             "item": {
@@ -49,8 +49,8 @@ elems = list(coll_price.aggregate([
                                     {
                                         "$filter": {
                                             "input": "$data.series",
-                                            "as": "item",
-                                            "cond": {
+                                            "as"   : "item",
+                                            "cond" : {
                                                 "$eq": ["$$item.name", "平均价"]
                                             }
                                         }
@@ -59,7 +59,7 @@ elems = list(coll_price.aggregate([
                                 ]
                             }
                         },
-                        "in": "$$item.data"
+                        "in"  : "$$item.data"
                     }
                 }
             }}
@@ -68,25 +68,25 @@ elems = list(coll_price.aggregate([
 ]))
 # %%
 vexpr = {
-    "collMod": "price",
-    "validator": {
+    "collMod"         : "price",
+    "validator"       : {
         "$jsonSchema": {
-            "bsonType": "object",
-            "required": ["category", "data", "name"],
+            "bsonType"  : "object",
+            "required"  : ["category", "data", "name"],
             "properties": {
                 "data": {
                     "properties": {
-                        "xAxis": {
+                        "xAxis" : {
                             "bsonType": "array",
                             "minItems": 1,
                             "maxItems": 1
                         },
                         "series": {
-                            "bsonType": "array",
-                            "minItems": 3,
-                            "maxItems": 3,
+                            "bsonType"   : "array",
+                            "minItems"   : 3,
+                            "maxItems"   : 3,
                             "uniqueItems": True,
-                            "items": {
+                            "items"      : {
                                 "properties": {
                                     "name": {
                                         "enum": [
@@ -103,7 +103,7 @@ vexpr = {
             }
         }
     },
-    "validationLevel": "strict",
+    "validationLevel" : "strict",
     "validationAction": "error"
 }
 
@@ -149,29 +149,42 @@ def item2df(item: dict) -> pd.DataFrame:
 
 
 def joinDFs(dataframes, keys=None):
-    df = pd.concat(dataframes, axis=1)
+    df = pd.concat(dataframes, axis=1)  # type: pd.DataFrame
+    # sort columns
+    df.columns = sorted(df.columns)
     return df.sort_index()
+
 
 # %% [markdown]
 # ## output
 
+VERSION = '0.3.0'  # finished crawl, added withPrice status
+# VERSION = '0.2.2' # added feat of column sort
 
-out_dir = f'sjm_dnf_price_v0.2.1_{getCurTime()}'
+out_dir = f'output/sjm_dnf_price_v{VERSION}_{getCurTime()}'
 out_prices_dir = path.join(out_dir, "prices")
 out_indexes_dir = path.join(out_dir, "indexes")
 os.makedirs(out_dir)
 os.makedirs(out_prices_dir)
 os.makedirs(out_indexes_dir)
 
+
 def transProductInDB(productItem: dict) -> dict:
-    return {
-        "L1_name": productItem['category']["L1_name"],
-        "L1_id": productItem['category']["L1_id"],
-        "L2_name": productItem['category']["L2_name"],
-        "L2_id": productItem['category']["L2_id"],
-        "name": productItem["name"],
-        "id": productItem["_id"],
-    }
+    try:
+        item = {
+            "L1_name": productItem['category']["L1_name"],
+            "L1_id"  : productItem['category']["L1_id"],
+            "L2_name": productItem['category']["L2_name"],
+            "L2_id"  : productItem['category']["L2_id"],
+            "name"   : productItem["name"],
+            "id"     : productItem["_id"],
+            "status" : productItem['withPrice']
+        }
+        return item
+    except Exception as e:
+        print(productItem)
+        raise e
+
 
 df_product = pd.DataFrame([transProductInDB(item) for item in coll_product.find({})])
 fp_product = f'{out_indexes_dir}/index.csv'
@@ -200,7 +213,7 @@ exit(0)
 list(coll_price.aggregate([
     {
         "$group": {
-            "_id": "$category.L1_name",
+            "_id"  : "$category.L1_name",
             "count": {"$count": {}}
         }
     }
@@ -226,7 +239,7 @@ coll_price.find_one({})
 list(coll_price.aggregate([
     {
         "$group": {
-            "_id": "$category.L1_name",
+            "_id"  : "$category.L1_name",
             "items": {"$push": "$$ROOT"}
         }
     }

@@ -6,10 +6,8 @@ from scrapy import Request
 from scrapy.http import TextResponse
 
 from scripts.misc.treeDataLayered2db import queryTreeDataWithLayers
+from sjm_dnf_prices.ds import SPIDER_PRODUCT_NAME, COLL_PRODUCT_NAME
 from sjm_dnf_prices.pipelines import FIELD_COLL_NAME
-
-SPIDER_PRODUCT_NAME = "product"
-COLL_PRODUCT_NAME = SPIDER_PRODUCT_NAME
 
 
 def parseJsonResponse(response):

@@ -38,6 +38,34 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/output/sjm_dnf_price_v0.4.2_08-26T11-47/prices/composite/index.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/sjm_dnf_price_v0.4.3_08-26T12-43/prices/composite/index.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/sjm_dnf_price_v0.4.3_08-26T12-43/prices/single/副职业/副职材料.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/output/sjm_dnf_price_v0.4.4_08-26T13-27/indexes/basic.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

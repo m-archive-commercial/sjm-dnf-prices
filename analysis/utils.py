@@ -3,9 +3,13 @@ source: own
 author: https://github.com/MarkShawn2020
 create: 8月 24, 2022, 17:02
 """
+import os
 from datetime import datetime
+from typing import List
 
 import pandas as pd
+
+from ds import PointStatus, PeriodStatus, PeriodPoint
 
 
 def transProductInDB(productItem: dict) -> dict:
@@ -61,4 +65,44 @@ def joinDFs(dataframes, keys=None):
     df = pd.concat(dataframes, axis=1)  # type: pd.DataFrame
     # sort columns
     df.columns = sorted(df.columns)
+    df.index = pd.to_datetime([('20' + i).replace('.', '-') for i in df.index])
     return df.sort_index()
+
+
+def dump_csv(df: pd.DataFrame, fp: str):
+    df.to_csv(fp, encoding='utf_8_sig')
+    print(f'dumped dataframe into csv file://{fp}')
+
+
+def get_latest_composite_prices_df():
+    def get_latest_output_dir():
+        fps = [os.path.join(output_dir, i) for i in os.listdir(output_dir)]
+        fps_dir = [i for i in fps if os.path.isdir(i)]
+        return sorted(fps_dir)[-1]
+
+    output_dir = 'output'
+
+    latest_composite_prices_fp = os.path.join(get_latest_output_dir(), 'prices/composite/index.csv')
+    df_latest_composite_prices = pd.read_csv(latest_composite_prices_fp, index_col=0)
+    # date sample: 17.06.14
+    df_latest_composite_prices.index = pd.to_datetime(df_latest_composite_prices.index)
+    return df_latest_composite_prices
+
+
+def getPeriods(col: pd.Series) -> List[PeriodPoint]:
+    cur_status = PointStatus.UNKNOWN  # type: PointStatus
+    periodPoints = []  # type: List[PeriodPoint]
+    for date, data in col.iteritems():
+        if pd.isna(data):
+            if cur_status != PointStatus.NAN:
+                periodPoints.append({"date": date, "status": PeriodStatus.TO_NAN})
+            cur_status = PointStatus.NAN
+        elif not pd.isna(data):
+            if cur_status != PointStatus.NOT_NAN:
+                periodPoints.append({"date": date, "status": PeriodStatus.TO_NOT_NAN})
+            cur_status = PointStatus.NOT_NAN
+    return periodPoints
+
+
+def getPeriodsCount(col: pd.Series) -> int:
+    return len([i for i in getPeriods(col) if i['status'] == PeriodStatus.TO_NOT_NAN])

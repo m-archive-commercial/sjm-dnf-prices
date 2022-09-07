@@ -52,6 +52,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/out/sjm-dnf_v0.7.1_09-07T21:54:59/byGroup/副职业/副职材料/661.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.7.1_09-07T21:54:59/products.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

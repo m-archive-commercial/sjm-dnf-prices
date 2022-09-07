@@ -14,4 +14,5 @@ create: Sep 07, 2022, 13:44
 # VERSION = '0.5.0'  # bug: fixed periods dump
 # VERSION = '0.6.0'  # feat: added ys/zs
 # VERSION = '0.7.0'  # feat: merge price and ys/zs
-VERSION = '0.7.1'  # feat: added score index
+# VERSION = '0.7.1'  # feat: added score index
+VERSION = '0.7.2'  # feat: enabled extensibility for ys/zs

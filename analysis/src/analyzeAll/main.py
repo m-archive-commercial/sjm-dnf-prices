@@ -17,7 +17,12 @@ from log import getLogger
 from versions import VERSION
 
 WITH_PCT = True
+DUMP_SCORE = True  # need `WITH_PCT = True`
+
 DUMP_TOTAL = True
+DUMP_GROUP = True
+
+PACK_OUT = True
 
 if __name__ == '__main__':
 
@@ -55,8 +60,9 @@ if __name__ == '__main__':
         shutil.copyfile(os.path.join(SRC_DIR, "versions.py"), os.path.join(outDir, "versions.txt"))
         dumpProductsMeta2csv(os.path.join(outDir, "products.csv"))
 
-    byGroupDir = os.path.join(outDir, "byGroup")
-    os.mkdir(byGroupDir)
+    if DUMP_GROUP:
+        byGroupDir = os.path.join(outDir, "byGroup")
+        os.mkdir(byGroupDir)
 
     # by total
     if WITH_PCT:
@@ -67,23 +73,25 @@ if __name__ == '__main__':
             dump_series2json(zsTotalSeries, os.path.join(outDir, "zs-total.json"))
 
     # by group
+    ysScoreSeriesList = []
+    zsScoreSeriesList = []
     for productGroup in productGroupedList:
         L1Name = productGroup['_id']["L1_name"]
         L2Name = productGroup['_id']["L2_name"]
-        L1Dir = os.path.join(byGroupDir, L1Name)
-        if not os.path.exists(L1Dir):
-            os.mkdir(L1Dir)
-        L2Dir = os.path.join(L1Dir, L2Name)
-        os.mkdir(L2Dir)
 
         productItems = productGroup["items"]
-        L2IndexSeries = pd.Series(dict((item["id"], item["name"]) for item in productItems))
-        dump_series2json(L2IndexSeries, os.path.join(L2Dir, "index.json"))
+        if DUMP_GROUP:
+            L1Dir = os.path.join(byGroupDir, L1Name)
+            if not os.path.exists(L1Dir):
+                os.mkdir(L1Dir)
+            L2Dir = os.path.join(L1Dir, L2Name)
+            os.mkdir(L2Dir)
+            L2IndexSeries = pd.Series(dict((item["id"], item["name"]) for item in productItems))
+            dump_series2json(L2IndexSeries, os.path.join(L2Dir, "index.json"))
         for productItem in productItems:
+            productId = productItem["id"]
             productName = productItem["name"]
             productFullName = f'{L1Name}-{L2Name}-{productName}'
-
-            productId = productItem["id"]
 
             priceSeries = createSeries(productId, "price")
             ysSeries = createSeries(productId, "ys")
@@ -93,37 +101,54 @@ if __name__ == '__main__':
                 # align total series to ys/zs series
                 ysPctSeries = ysSeries / ysTotalSeries[ysSeries.index]
                 ysPctSeries.name = "ys-pct"
-                ysPriceSeries = ysPctSeries * priceSeries
-                ysPriceSeries.name = "ys-price"
+                ysScoreDF = ysPctSeries * priceSeries  # type: pd.Series
+                ysScoreDF.name = "ys-score"
+                ysScoreSeriesForConcat = ysScoreDF.copy()
+                ysScoreSeriesForConcat.name = productId
+                ysScoreSeriesList.append(ysScoreSeriesForConcat)
 
                 zsPctSeries = zsSeries / zsTotalSeries[zsSeries.index]
                 zsPctSeries.name = "zs-pct"
-                zsPriceSeries = zsPctSeries * priceSeries
-                zsPriceSeries.name = "zs-price"
+                zsScoreSeries = zsPctSeries * priceSeries
+                zsScoreSeries.name = "zs-score"
+                zsScoreSeriesForConcat = zsScoreSeries.copy()
+                zsScoreSeriesForConcat.name = productId
+                zsScoreSeriesList.append(zsScoreSeriesForConcat)
 
-            productInfo = {
-                "id"    : productId,
-                "path"  : productFullName,
-                "length": {
-                    "price": len(priceSeries),
-                    "ys"   : len(ysSeries),
-                    "zs"   : len(zsSeries)
+            if DUMP_GROUP:
+                productInfo = {
+                    "id"    : productId,
+                    "path"  : productFullName,
+                    "length": {"price": len(priceSeries), "ys": len(ysSeries), "zs": len(zsSeries)}
                 }
-            }
-            logger.info(f'handling {productInfo}')
-            # price | ys | zs 的长度不一定相等:
-            #   failed case: {'id': '1683', 'path': '消耗品-其他-+12 青铜装备强化券 (30天)（旧）', 'length': {'price': 1120, 'ys': 1119, 'zs': 398}}
-            #   passed case: {'id': '7872', 'path': '首饰-戒指-蓬勃生命的落幕', 'length': {'price': 445, 'ys': 445, 'zs': 445}}
-            # - assert len(priceSeries) == len(ysSeries) == len(zsSeries), productInfo
+                logger.info(f'handling {productInfo}')
+                # price | ys | zs 的长度不一定相等:
+                #   failed case: {'id': '1683', 'path': '消耗品-其他-+12 青铜装备强化券 (30天)（旧）', 'length': {'price': 1120, 'ys': 1119, 'zs': 398}}
+                #   passed case: {'id': '7872', 'path': '首饰-戒指-蓬勃生命的落幕', 'length': {'price': 445, 'ys': 445, 'zs': 445}}
+                # - assert len(priceSeries) == len(ysSeries) == len(zsSeries), productInfo
 
-            toConcatSeries = [priceSeries, ysSeries, zsSeries]
-            if WITH_PCT:
-                toConcatSeries.extend([ysPctSeries, zsPctSeries, ysPriceSeries, zsPriceSeries])
-            productDF = pd.concat(toConcatSeries, axis=1)
-            productInfo['length']['concat'] = len(productDF)
-            # concentrating with different elements has possibility to be bigger
-            assert len(productDF) >= max(len(priceSeries), len(ysSeries), len(zsSeries)), productInfo
-            dump_df2csv(productDF, os.path.join(L2Dir, productId + ".csv"))
+                toConcatSeries = [priceSeries, ysSeries, zsSeries]
+                if WITH_PCT:
+                    toConcatSeries.extend([ysPctSeries, zsPctSeries, ysScoreDF, zsScoreSeries])
+                productDF = pd.concat(toConcatSeries, axis=1)
+                productInfo['length']['concat'] = len(productDF)
+                # concentrating with different elements has possibility to be bigger
+                assert len(productDF) >= max(len(priceSeries), len(ysSeries), len(zsSeries)), productInfo
+                dump_df2csv(productDF, os.path.join(L2Dir, productId + ".csv"))
 
-    packOut(outDir)
+    # generate ys/zs score indices
+    if DUMP_SCORE:
+        ysScoreDF = pd.concat(ysScoreSeriesList, axis=1)
+        zsScoreDF = pd.concat(zsScoreSeriesList, axis=1)
+        ysScoreIndexSeries = ysScoreDF.sum(axis=1)
+        ysScoreIndexSeries.name = 'ys'
+        zsScoreIndexSeries = zsScoreDF.sum(axis=1)
+        zsScoreIndexSeries.name = 'zs'
+        scoreIndexDF = pd.concat([ysScoreIndexSeries, zsScoreIndexSeries], axis=1)
+        dump_df2csv(ysScoreDF, os.path.join(outDir, 'ys-score_detailed.csv'))
+        dump_df2csv(zsScoreDF, os.path.join(outDir, 'zs-score_detailed.csv'))
+        dump_df2csv(scoreIndexDF, os.path.join(outDir, 'score.csv'))
+
+    if PACK_OUT:
+        packOut(outDir)
     logger.info("=== finished ===")

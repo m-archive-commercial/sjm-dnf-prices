@@ -6,7 +6,7 @@ create: 8月 24, 2022, 16:41
 from enum import Enum
 
 
-class STATUS_WITH_PRICE(str, Enum):
+class STATUS(str, Enum):
     OK = "OK"
     PASSED_FOR_INTERNAL_SERVER_ERROR = "passed for 500 internal server"
     PASSED_FOR_KOREAN_ONLY = "passed for korean only"
@@ -15,9 +15,9 @@ class STATUS_WITH_PRICE(str, Enum):
 
 
 PASSED_STATUSES_WITH_PRICE = [
-    STATUS_WITH_PRICE.OK,
-    STATUS_WITH_PRICE.PASSED_FOR_INTERNAL_SERVER_ERROR,
-    STATUS_WITH_PRICE.PASSED_FOR_KOREAN_ONLY
+    STATUS.OK,
+    STATUS.PASSED_FOR_INTERNAL_SERVER_ERROR,
+    STATUS.PASSED_FOR_KOREAN_ONLY
 ]
 
 FIELD_WITH_PRICE = "withPrice"

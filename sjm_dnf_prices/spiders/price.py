@@ -6,7 +6,7 @@ import scrapy
 from scrapy import Request
 from scrapy.http import TextResponse
 
-from sjm_dnf_prices.ds import STATUS_WITH_PRICE, SPIDER_PRICE_NAME, COLL_PRICE_NAME, FIELD_WITH_PRICE, \
+from sjm_dnf_prices.ds import STATUS, SPIDER_PRICE_NAME, COLL_PRICE_NAME, FIELD_WITH_PRICE, \
     COLL_PRODUCT_NAME, PASSED_STATUSES_WITH_PRICE, FIELD_WITH_YS, FIELD_WITH_ZS
 from sjm_dnf_prices.items import PriceItem
 from sjm_dnf_prices.settings import MONGO_DATABASE
@@ -108,7 +108,7 @@ class PriceSpider(scrapy.Spider):
                 )
                 yield priceItem
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                    {"$set": {fieldMarkFinished: STATUS_WITH_PRICE.OK}})
+                    {"$set": {fieldMarkFinished: STATUS.OK}})
             else:
                 """
                 response sample:
@@ -117,7 +117,7 @@ class PriceSpider(scrapy.Spider):
                 """
                 assert set(data.keys()) == {'success', 'errorCode', 'msg'}, data
                 db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                    {"$set": {fieldMarkFinished: STATUS_WITH_PRICE.FAILED_FOR_TOO_FREQUENT}})
+                    {"$set": {fieldMarkFinished: STATUS.FAILED_FOR_TOO_FREQUENT}})
 
         if response.status == 500:
             """
@@ -130,4 +130,4 @@ class PriceSpider(scrapy.Spider):
                 2022-08-22 06:03:44 [scrapy.spidermiddlewares.httperror] INFO: Ignoring response <500 http://dnf.yxwujia.com/a/query/data?server=qqqfpj&wpmc=%E6%9D%B0%E6%A3%AE&middot;%E6%A0%BC%E9%87%8C%E5%85%8B%20%E5%8D%A1%E7%89%87&type=&startDate=2016-01-01&endDate=2022-08-20&unit=yxb&low=djx&avg=pjjx&high=gjx&period=day>: HTTP status code is not handled or not allowed
             """
             db[COLL_PRODUCT_NAME].update_one({"_id": id},
-                {"$set": {fieldMarkFinished: STATUS_WITH_PRICE.PASSED_FOR_INTERNAL_SERVER_ERROR}})
+                {"$set": {fieldMarkFinished: STATUS.PASSED_FOR_INTERNAL_SERVER_ERROR}})

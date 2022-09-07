@@ -4,7 +4,7 @@ author: https://github.com/MarkShawn2020
 create: 8月 22, 2022, 06:27
 """
 from scripts.before_crawl.db_clear_price_invalid import coll_price, coll_product
-from sjm_dnf_prices.ds import STATUS_WITH_PRICE, FIELD_WITH_PRICE
+from sjm_dnf_prices.ds import STATUS, FIELD_WITH_PRICE
 
 if __name__ == '__main__':
 
@@ -17,9 +17,9 @@ if __name__ == '__main__':
         id = itemInPrice["_id"]
         itemInProduct = coll_product.find_one({"_id": id})
 
-        if itemInProduct.get(FIELD_WITH_PRICE) != STATUS_WITH_PRICE.OK:
+        if itemInProduct.get(FIELD_WITH_PRICE) != STATUS.OK:
             misMatchedIds.append(id)
-            coll_product.update_one({"_id": id}, {"$set": {FIELD_WITH_PRICE: STATUS_WITH_PRICE.OK}})
+            coll_product.update_one({"_id": id}, {"$set": {FIELD_WITH_PRICE: STATUS.OK}})
         else:
             matchedIds.append(id)
 

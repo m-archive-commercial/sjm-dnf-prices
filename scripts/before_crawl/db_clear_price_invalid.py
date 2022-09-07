@@ -6,7 +6,7 @@ create: 8月 20, 2022, 23:17
 import pymongo
 
 from sjm_dnf_prices.settings import MONGO_DATABASE
-from sjm_dnf_prices.ds import STATUS_WITH_PRICE, COLL_PRICE_NAME, FIELD_WITH_PRICE, COLL_PRODUCT_NAME
+from sjm_dnf_prices.ds import STATUS, COLL_PRICE_NAME, FIELD_WITH_PRICE, COLL_PRODUCT_NAME
 
 uri = pymongo.MongoClient()
 db = uri[MONGO_DATABASE]

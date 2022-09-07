@@ -48,7 +48,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept'         : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
     'Accept-Language': 'en',
     # dnf.session.id 是 price 爬取的必要参数
-    'Cookie'         : 'dnf.session.id=c4eba398129e481e9be0b9a70010e2b4;'
+    'Cookie'         : 'dnf.session.id=79d1ba1b62134eb785b8372dbd3ee75b;'
 }
 
 RETRY_ENABLED = False

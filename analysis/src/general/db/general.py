@@ -7,5 +7,4 @@ from pymongo import MongoClient
 
 client = MongoClient()
 db = client['sjm_dnf_prices']
-coll_price = db['price']
-coll_product = db['product']
+collProduct = db['product']

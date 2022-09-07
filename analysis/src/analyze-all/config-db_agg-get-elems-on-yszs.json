@@ -1,0 +1,26 @@
+{
+  "$group": {
+    "_id": {
+      "L1_name": "$category.L1_name",
+      "L2_name": "$category.L2_name"
+    },
+    "items": {
+      "$push": {
+        "name": "$name",
+        "category": "$category",
+        "x": {
+          "$arrayElemAt": [
+            "$data.xAxis.data",
+            0
+          ]
+        },
+        "y": {
+          "$arrayElemAt": [
+            "$data.series.data",
+            0
+          ]
+        }
+      }
+    }
+  }
+}

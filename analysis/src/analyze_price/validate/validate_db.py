@@ -6,7 +6,7 @@ create: 8月 24, 2022, 16:58
 from collections import OrderedDict
 from pprint import pprint
 
-from base import db
+from general import db
 
 vexpr = {
     "collMod"         : "price",

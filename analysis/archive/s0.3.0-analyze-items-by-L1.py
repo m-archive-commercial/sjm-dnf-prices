@@ -1,7 +1,7 @@
 # %% [markdown]
 # ## how to handle concat dataframes with different indices
 #
-# 1. `pd.concat`, `pd.merge` , `df.join` all works, with method specified as `inner | outer | left | ...`
+# 1. `pd.concat`, `pd.merge` , `dfRaw.join` all works, with method specified as `inner | outer | left | ...`
 # 2. but we should be especially careful about the duplicated indexes, which would lead to the error of `InvalidIndexError: Reindexing only valid with uniquely valued Index objects`
 
 # %%
@@ -11,7 +11,7 @@ from os import path
 import pandas as pd
 from datetime import datetime
 
-from base import coll_price, db, coll_product
+from general import coll_price, db, coll_product
 
 elems = list(coll_price.aggregate([
     {

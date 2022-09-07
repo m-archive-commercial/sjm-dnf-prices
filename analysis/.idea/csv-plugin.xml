@@ -3,6 +3,132 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:38:10/indexes/basic.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:38:10/ys/composite/index.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:38:10/ys/single/副职业/副职材料.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:38:10/ys/single/副职业/控偶师.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:38:10/ys/single/副职业/炼金术师.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:40:22/ys/composite/index.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:40:22/ys/single/副职业/副职材料.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:40:22/ys/single/副职业/控偶师.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:40:22/ys/single/副职业/炼金术师.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:40:22/ys/single/副职业/附魔师.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T14:48:46/ys/composite/total-ys.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T15:06:17/ys/single/副职业/副职材料_pct.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T15:06:17/ys/single/副职业/控偶师_pct.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T15:06:17/ys/single/副职业/控偶师_raw.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T15:06:17/ys/single/副职业/炼金术师_pct.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.6.0_ys_09-07T15:06:17/ys/single/副职业/炼金术师_raw.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.7.0_09-07T16:57:07/stat/ys-total.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/out/sjm-dnf_v0.7.0_09-07T16:57:07/stat/zs-total.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/output/sjm_dnf_price_v0.2.1_08-23T19-16/prices/武器.csv">
           <value>
             <Attribute>

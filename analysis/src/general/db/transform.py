@@ -3,9 +3,9 @@ source: own
 author: https://github.com/MarkShawn2020
 create: Sep 07, 2022, 13:22
 """
-from log import get_logger
+from log import getLogger
 
-logger = get_logger('utils-db')
+logger = getLogger('utils-db')
 
 
 def transProductInDB(product: dict) -> dict:

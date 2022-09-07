@@ -4,13 +4,13 @@ from os import path
 
 from general.df.dump import dump_df2csv
 from versions import VERSION
-from general.path import OUT_DIR
+from path import OUT_DIR
 from general.db.general import db
 from general.df.join import joinDFs
 from general.df.transform import item2df
 from general.general import getCurTime, packOut
 
-from core import dumpProductsMeta2csv, dumpPricesComposite
+from general.core import dumpProductsMeta2csv, dumpPricesComposite
 
 
 if __name__ == '__main__':
@@ -55,7 +55,7 @@ if __name__ == '__main__':
             dump_df2csv(dfPct, f'{L1_dir}/{L2_name}_pct.csv')
 
         dump_df2csv(dfTotal, os.path.join(outSubCompositeDir, f"total-{subtype}.csv"))
-        dumpProductsMeta2csv(db['product'], os.path.join(outIndexesDir, "index.csv"))
+        dumpProductsMeta2csv(os.path.join(outIndexesDir, "index.csv"))
         dumpPricesComposite(dfFull, outSubCompositeDir)
 
         packOut(outDir)

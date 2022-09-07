@@ -6,9 +6,9 @@ create: Sep 07, 2022, 13:22
 import os
 from datetime import datetime
 
-from log import get_logger
+from log import getLogger
 
-logger = get_logger("utils-general")
+logger = getLogger("utils-general")
 
 
 def getCurTime():

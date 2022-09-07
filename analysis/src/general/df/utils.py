@@ -7,7 +7,7 @@ import os
 
 import pandas as pd
 
-from general.path import OUT_DIR
+from path import OUT_DIR
 
 
 def get_latest_composite_prices_df():

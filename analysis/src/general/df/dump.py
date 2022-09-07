@@ -7,10 +7,10 @@ from typing import Union
 
 import pandas as pd
 
-from log import get_logger
+from log import getLogger
 
 
-logger = get_logger("pandas-dump")
+logger = getLogger("pandas-dump")
 
 
 def dump_df2csv(df: Union[pd.DataFrame, pd.Series], fp: str):

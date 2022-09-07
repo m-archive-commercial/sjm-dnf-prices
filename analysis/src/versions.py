@@ -4,7 +4,7 @@ author: https://github.com/MarkShawn2020
 create: Sep 07, 2022, 13:44
 """
 
-# VERSION = '0.2.2' # added feat of column sort
+# VERSION = '0.2.2'  # added feat of column sort
 # VERSION = '0.3.0'  # finished crawl, added withPrice status
 # VERSION = '0.4.0'  # added L2 category
 # VERSION = '0.4.1'  # fixed 500

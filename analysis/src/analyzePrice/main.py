@@ -11,17 +11,17 @@ from os import path
 
 from general.df.join import joinDFs
 from versions import VERSION
-from analyze_price.extends.period import dumpIndexesPeriods
-from core import dumpProductsMeta2csv, dumpPricesComposite, dumpPricesSingle
-from general.db.general import collPrice, collProduct, db
-from general.path import OUT_DIR
-from log import get_logger
+from analyzePrice.extends.period import dumpIndexesPeriods
+from general.core import dumpProductsMeta2csv, dumpPricesComposite, dumpPricesSingle
+from general.db.general import collProduct, db
+from path import OUT_DIR
+from log import getLogger
 from general.df.transform import item2df
 from general.general import getCurTime, packOut
 
 
 if __name__ == '__main__':
-    logger = get_logger("dump-prices")
+    logger = getLogger("dump-prices")
 
     subtype = 'price'
     outDir = os.path.join(OUT_DIR, f'sjm-dnf_v{VERSION}_{subtype}_{getCurTime()}')

@@ -6,7 +6,7 @@ create: Sep 07, 2022, 14:10
 import pandas as pd
 
 from general.df.dump import dump_series2json
-from analyze_price.ds.utils import getPeriods
+from analyzePrice.ds.utils import getPeriods
 
 
 def dumpIndexesPeriods(dfFull, out_indexes_dir):

@@ -7,9 +7,9 @@ import json
 
 import pandas as pd
 
-from log import get_logger
+from log import getLogger
 
-logger = get_logger('pandas-transform')
+logger = getLogger('pandas-transform')
 
 
 def item2df(item: dict, withNamesLevel=0) -> pd.DataFrame:

@@ -7,7 +7,7 @@ import os.path
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
-from general.path import LOGS_DIR
+from path import LOGS_DIR
 
 
 FORMATTER = logging.Formatter(
@@ -19,32 +19,32 @@ FORMATTER = logging.Formatter(
 )
 
 
-def get_console_handler(level=logging.INFO):
+def getConsoleHandler(level=logging.INFO):
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(FORMATTER)
     console_handler.setLevel(level)
     return console_handler
 
 
-def get_file_handler(filename="track.log", level=logging.DEBUG):
+def getFileHandler(filename="track.log", level=logging.DEBUG):
     file_handler = TimedRotatingFileHandler(os.path.join(LOGS_DIR, filename), when='midnight')
     file_handler.setFormatter(FORMATTER)
     file_handler.setLevel(level)
     return file_handler
 
 
-def get_logger(logger_name):
+def getLogger(logger_name):
     _logger = logging.getLogger(logger_name)
     _logger.setLevel(logging.DEBUG)  # better to have too much log than not enough
-    _logger.addHandler(get_console_handler(os.getenv('LOG_LEVEL', logging.INFO)))
-    _logger.addHandler(get_file_handler("out.log", logging.DEBUG))
+    _logger.addHandler(getConsoleHandler(os.getenv('LOG_LEVEL', logging.INFO)))
+    _logger.addHandler(getFileHandler("out.log", logging.DEBUG))
     # with this pattern, it's rarely necessary to propagate the error up to parent
     _logger.propagate = False
     return _logger
 
 
 if __name__ == '__main__':
-    logger = get_logger("test")
+    logger = getLogger("test")
     logger.debug("test of debug")
     logger.info("test of info")
     logger.warning("test of info")

@@ -24,4 +24,4 @@ class PriceItem:
     coll_name: str
 
     def __repr__(self):
-        return f"PriceItem(id={self._id}, name={self.name}, success={self.success}, msg={self.msg}, category={printCategory(self.category)})"
+        return f"PriceItem(collName={self.coll_name}, id={self._id}, name={self.name}, success={self.success}, msg={self.msg}, category={printCategory(self.category)})"

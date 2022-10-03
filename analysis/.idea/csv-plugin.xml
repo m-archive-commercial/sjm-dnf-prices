@@ -31,13 +31,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/out/sjm-dnf_v0.7.0_09-07T21:25:09/score.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/out/sjm-dnf_v0.7.1_09-07T21:31:30/score.csv">
           <value>
             <Attribute>
@@ -46,20 +39,6 @@
           </value>
         </entry>
         <entry key="/out/sjm-dnf_v0.7.1_09-07T21:31:30/ys-score_detailed.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/out/sjm-dnf_v0.7.1_09-07T21:54:59/byGroup/副职业/副职材料/661.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/out/sjm-dnf_v0.7.1_09-07T21:54:59/products.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
